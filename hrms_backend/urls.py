@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/employees/', include('employees.urls')),
     path('api/attendance/', include('attendance.urls')),
+    path('api/payroll/', include('payroll.urls')),
 ]
 
 if settings.DEBUG:
