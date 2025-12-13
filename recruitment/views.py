@@ -818,4 +818,16 @@ class RecruitmentReportViewSet(viewsets.ModelViewSet):
             
             if current_count > 0:
                 rate = (next_count / current_count) * 100
-                conversion_rates[f"{status_
+                conversion_rates[f"{status_choice[1]} -> {Application.STATUS_CHOICES[i + 1][1]}"] = round(rate, 2)
+                metrics_data = {
+                    'total_postings': total_postings,
+                    'active_postings': active_postings,
+                    'total_applications': total_applications,
+                    'applications_by_status': applications_by_status,
+                    'average_time_to_hire': round(average_time_to_hire, 2),
+                    'applications_by_source': applications_by_source,
+                    'conversion_rates': conversion_rates
+                }
+                
+                serializer = RecruitmentMetricsSerializer(metrics_data)
+                return Response(serializer.data)
